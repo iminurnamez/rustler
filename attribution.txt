@@ -1,0 +1,16 @@
+All audio files used in this game and listed below are released under the same license as the source work each audio file is derived from.
+
+
+
+Licenses:
+
+CC-BY3 http://creativecommons.org/licenses/by/3.0/.
+CC-0     http://creativecommons.org/publicdomain/zero/1.0/
+Sampling+ http://creativecommons.org/licenses/sampling+/1.0/legalcode 
+
+
+
+Sound File                                 Source Work                                                                                                     Source Author                                         License                     
+
+gun_sound.ogg         "pistol_riccochet.ogg" https://www.freesound.org/people/Diboz/sounds/213925/         https://www.freesound.org/people/Diboz/           CC-0
+whip_sound.ogg        "Whip Crack 01.wav" https://www.freesound.org/people/CGEffex/sounds/93100/        https://www.freesound.org/people/CGEffex/        CC-BY3
