@@ -9,7 +9,7 @@ class WolfSpawner(object):
         self.check_rect.center = self.pos
         
     def update(self, wolves):
-        if randrange(10000) < 2:
+        if randrange(20000) < 9:
             num_wolves = len([x for x in wolves if self.check_rect.collidepoint(x.pos)])
             if num_wolves < 2:
                 wolves.append(Wolf(self.pos))

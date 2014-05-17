@@ -21,6 +21,7 @@ def point_vector(p1, p2):
 
 class Cowboy(object):
     def __init__(self, center_point):
+        self.name = "cowboy"
         self.image = prepare.GFX["cowboy"]
         self.rot_image = self.image
         self.pos = center_point
@@ -104,7 +105,7 @@ class Cowboy(object):
     
     def draw_icon(self, surface, offset):
         icon = pg.Rect(0, 0, 4, 4)
-        icon.center = ((self.rect.centerx + offset[0])/ 8, (self.rect.centery + offset[0]) / 8)
+        icon.center = ((self.rect.centerx + offset[0])/ 5, (self.rect.centery + offset[1]) / 5)
         pg.draw.rect(surface, pg.Color("blue"), icon)
         
     def draw(self, surface):

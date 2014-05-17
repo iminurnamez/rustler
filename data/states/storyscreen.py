@@ -8,7 +8,7 @@ from ..components.labels import TransparentGroupLabel as TGLabel
 class StoryScreen(tools._State):
     def __init__(self):
         super(StoryScreen, self).__init__()
-        self.next = "GAME"
+        self.next = "CONTROLS"
         lines = ["Disenchanted with the constant barrage of ineffectual",
                     "e-mails from MooveOn.org and disgusted by the",
                     "seeming success of the National Boltgun Association's",
@@ -48,7 +48,7 @@ class StoryScreen(tools._State):
     def draw(self, surface):
         surface.fill(pg.Color("tan"))
         for label in self.labels:
-            label.display(surface)
+            label.draw(surface)
         if self.labels[0].rect.top <= 5:
-            self.instruct_label.display(surface)
+            self.instruct_label.draw(surface)
             

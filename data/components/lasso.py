@@ -1,4 +1,4 @@
-from math import cos, sin, pi
+from math import cos, sin, pi, atan2
 from itertools import chain
 import pygame as pg
 
@@ -29,8 +29,8 @@ class Lasso(object):
         self.flight_start = 0
         self.anchor = self.cowboy.pos
         self.center = self.cowboy.pos
-        self.length = 1
-        self.max_length = 60
+        self.length = 1.0
+        self.max_length = 60.0
         self.state = "Windup"
         
     def get_event(self, event):
@@ -45,7 +45,7 @@ class Lasso(object):
         self.update_loop_coords()
         self.state = "Aloft"
         self.flight_start = self.ticks
-        self.flight_time = power * 180
+        self.flight_time = (self.length / self.max_length) * 180
         
     def update_loop_coords(self):
         loop_length = self.length - self.radius
@@ -55,16 +55,22 @@ class Lasso(object):
                                      int(self.anchor[1] - (sin(self.angle) * loop_length)))
         self.rect = pg.Rect(0, 0, self.radius * 2, self.radius * 2)
         self.rect.center = self.center
+
         
     def fly(self):
         self.length += 1.5
         self.update_loop_coords()
                
+    def get_angle(self, pos):
+        x_dist = pos[0] - self.anchor[0]
+        y_dist = pos[1] - self.anchor[1] 
+        return atan2(-y_dist, x_dist)
+        
     def update(self, cows, wolves):
         self.ticks += 1
         self.anchor = self.cowboy.pos
         if self.state == "Windup":
-            self.radius += .025
+            self.radius += .04
             self.radius = min(self.radius, self.max_radius)
             self.angle += .1
             self.angle = self.angle % (pi * 2)             
@@ -83,12 +89,14 @@ class Lasso(object):
                         self.state = "Attached"
                         self.target = animal
                         self.target.lassoed = True
+                        self.target.angle = self.angle + pi
                         break
                        
                         
         elif self.state == "Attached":
             vec = point_vector(self.target.pos, self.anchor)
-            self.target.move((vec[0] * .5, vec[1] * .5))
+            self.target.angle = self.get_angle(self.target.pos) + pi
+            self.target.move_turn(multiplier=2)
             
         
             

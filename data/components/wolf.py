@@ -5,6 +5,7 @@ from .. import prepare
 
 
 class Wolf(object):
+    name = "wolf"
     def __init__(self, center_point):
         self.image = prepare.GFX["wolf"]
         self.rot_image = self.image
@@ -68,7 +69,7 @@ class Wolf(object):
                 self.target = choice(neighbors)
                 self.hunting = True
             else:
-                self.angle += .001
+                self.angle += .002
         else:
             c_rect = pg.Rect(0, 0, 8, 8)
             c_rect.center = self.pos
@@ -86,7 +87,7 @@ class Wolf(object):
                 
     def draw_icon(self, surface, offset):
         icon = pg.Rect(0, 0, 3, 3)
-        icon.center = ((self.rect.centerx + offset[0])/ 8, (self.rect.centery + offset[0]) / 8)
+        icon.center = ((self.rect.centerx + offset[0])/ 5, (self.rect.centery + offset[1]) / 5)
         pg.draw.rect(surface, pg.Color("red"), icon)
                             
     def draw(self, surface):

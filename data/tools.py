@@ -9,7 +9,7 @@ class Control(object):
         self.caption = caption
         self.done = False
         self.clock = pg.time.Clock()
-        self.show_fps = True
+        self.show_fps = False
         self.keys = pg.key.get_pressed()
         self.state_dict = {}
         self.state_name = None
@@ -144,7 +144,6 @@ def load_all_fonts(directory, accept=(".ttf")):
 def load_jsons(directory, accept=(".json")):
     jsons = {}
     for f in os.listdir(directory):
-        print f
         name, ext = os.path.splitext(f)
         if ext.lower() in accept:
             with open(os.path.join(directory, f), "r") as infile:

@@ -18,16 +18,16 @@ class TitleScreen(tools._State):
         self.obstacles = [obstacles.BigRock((100, 100), None),
                                  obstacles.SmallRock((400, 300), None),
                                  obstacles.SmallRock((600, 600), None)]
-
-        for _ in range(15):
+        self.grass = []
+        for _ in range(25):
             _point = (randint(50, screen_rect.width - 50),
-                         randint(50, screen_rect.height - 50))
-            self.obstacles.append(obstacles.Grass(_point, None))
+                           randint(50, screen_rect.height - 50))
+            self.grass.append(obstacles.Grass(_point, None))
         self.cows = []
-        for i in range(10):
-            point = (randint(100, screen_rect.width - 100),
-                         randint(100, screen_rect.height - 100))
-            self.cows.append(cows.Cow(point))
+        for i in range(15):
+            point = (randint(100, screen_rect.width - 400),
+                         randint(100, screen_rect.height - 400))
+            self.cows.append(cows.Cow(point, 1.75))
         
         
     def get_event(self, event):
@@ -43,10 +43,12 @@ class TitleScreen(tools._State):
 
     def draw(self, surface):
         surface.fill(pg.Color("tan"))
+        for g in self.grass:
+            g.draw(surface)
         for obst in self.obstacles:
             obst.draw(surface)
         for cow in self.cows:
             cow.draw(surface)
-        self.title.display(surface)
-        self.instruct.display(surface)
+        self.title.draw(surface)
+        self.instruct.draw(surface)
         
