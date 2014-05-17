@@ -28,11 +28,16 @@ class Game(tools._State):
         
         self.whip_sound = prepare.SFX["whip_sound"]    
         self.load_level(self.level)
+        self.paused_time = 0
 
         
     def startup(self, persistent):
         self.persist = persistent
         pg.display.set_caption(self.level.title)
+        try:
+            self.paused_time += persistent["pause time"]
+        except KeyError:
+            self.paused_time = 0
 
         
     def load_level(self, level):
@@ -85,13 +90,14 @@ class Game(tools._State):
         self.move_all(x_move, y_move)
         self.cowboy.move((x_move, y_move))
         self.start_time = pg.time.get_ticks()
+        self.paused_time = 0
         
                 
         
     def end_level(self):
         self.persist["num cows"] = self.num_cows
         self.persist["rescued"] = self.rescued
-        self.persist["time"] = pg.time.get_ticks() - self.start_time
+        self.persist["time"] = pg.time.get_ticks() - (self.start_time + self.paused_time)
         self.next = "ENDSCREEN"
         self.done = True
         
