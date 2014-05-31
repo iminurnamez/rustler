@@ -1,4 +1,4 @@
-import pygame._view
+
 from . import prepare,tools
 from .states import game, titlescreen, storyscreen, worldmap, endscreen, controlsscreen
 
